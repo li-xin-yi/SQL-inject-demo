@@ -42,7 +42,7 @@ public class DBHandler extends SQLiteOpenHelper {
         addHandler(db, new Employee(30000, "Ryan", "ryan", "32193525",
                 "Ryanny", "(210)096-3287", "ryan@hogwarts.edu", "Ravenclaw House", 90000, "2000-04-10"));
         addHandler(db, new Employee(40000, "Samy", "samy", "32111111",
-                "Sam", "(450)218-8876", "samy@hogwarts.edu", "Slytherin", 40000, "2000-01-11"));
+                "Sam", "(450)218-8876", "samy@hogwarts.edu", "Slytherin House", 40000, "2000-01-11"));
         addHandler(db, new Employee(50000, "Ted", "ted", "24343244",
                 "Teddy", "(208)222-8712", "ted@hogwarts.edu", "Azkaban", 110000, "2000-11-3"));
     }
