@@ -83,11 +83,12 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put("PHONE", employee.getPhone());
             values.put("SALARY", employee.getSalary());
             values.put("ADDRESS", employee.getAddress());
-            values.put("EMAIL", employee.getSalary());
+            values.put("EMAIL", employee.getEmail());
             values.put("BIRTHDAY", dateFormat.format(employee.getBirthday()));
             db.insert(TABLE_NAME, null, values);
         }
     }
+
     public Employee findHandler(String username, String password)
     {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE NAME='" + username + "' AND PASSWORD='" + password+"'";

@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Intent intent = new Intent(MainActivity.this, Result.class);
                 intent.putExtra("ID",employee.getId());
+                intent.putExtra("SSN",employee.getSsn());
                 intent.putExtra("NAME",employee.getName());
                 intent.putExtra("NICKNAME",employee.getNickname());
                 intent.putExtra("SALARY",employee.getSalary());
