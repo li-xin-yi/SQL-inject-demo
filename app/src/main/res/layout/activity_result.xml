@@ -39,8 +39,8 @@
                             android:id="@+id/nameInput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:ems="15"
-                            android:inputType="number" />
+                            android:inputType="text"
+                            android:ems="15" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </TableRow>
@@ -235,7 +235,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:inputType="date" />
+                        android:inputType="date"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"/>
                 </com.google.android.material.textfield.TextInputLayout>
                 </TableRow>
 
@@ -255,6 +259,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="20dp"
+                            android:onClick="partialUpdateProfile"
                             android:text="Update" />
 
                         <Button

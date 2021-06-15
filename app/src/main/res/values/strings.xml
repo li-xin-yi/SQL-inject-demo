@@ -1,3 +1,8 @@
 <resources>
-    <string name="app_name">SQL-inject-demo</string>
+    <string name="app_name">SQL Inject Demo</string>
+    <string name="id_card_icon">&#xf2c2;</string>
+    <string name="phone_icon">&#xf879;</string>
+    <string name="birthday_icon">&#xf1fd;</string>
+    <string name="address_icon">&#xf3c5;</string>
+    <string name="email_icon">&#xf0e0;</string>
 </resources>

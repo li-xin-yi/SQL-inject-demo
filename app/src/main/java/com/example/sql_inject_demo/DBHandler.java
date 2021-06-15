@@ -16,14 +16,13 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String TABLE_NAME = "employee";
 
 
-
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, DB_NAME, factory, DB_VERSION);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase db){
-        String SQL_CREATE_TABLE = "CREATE TABLE "+ TABLE_NAME + "( ID INTEGER,"
+    public void onCreate(SQLiteDatabase db) {
+        String SQL_CREATE_TABLE = "CREATE TABLE " + TABLE_NAME + "( ID INTEGER,"
                 + "NAME TEXT,"
                 + "PASSWORD TEXT,"
                 + "SSN TEXT,"
@@ -34,47 +33,42 @@ public class DBHandler extends SQLiteOpenHelper {
                 + "SALARY INTEGER,"
                 + "BIRTHDAY DATE)";
         db.execSQL(SQL_CREATE_TABLE);
-        addHandler(db, new Employee(99999,"Admin","seedadmin","43254314",
-                "","","","",400000,"1990-03-05"));
-        addHandler(db, new Employee(10000,"Alice","seedalice","10211002",
-                "","","","",20000,"2000-09-20"));
-        addHandler(db, new Employee(20000,"Boby","seedboby","10213352",
-                "","","","",50000,"2000-04-20"));
-        addHandler(db, new Employee(30000,"Ryan","seedryan","32193525",
-                "","","","",90000,"2000-04-10"));
-        addHandler(db, new Employee(30000,"Samy","seedsamy","32111111",
-                "","","","",40000,"2000-01-11"));
-        addHandler(db, new Employee(40000,"Ted","seedted","24343244",
-                "","","","",110000,"2000-11-3"));
+        addHandler(db, new Employee(99999, "Admin", "admin", "43254314",
+                "Ad", "(403)220-1191", "admin@hogwarts.edu", "Gryffindor House", 400000, "1990-03-05"));
+        addHandler(db, new Employee(10000, "Alice", "alice", "10211002",
+                "Ali", "(400)210-2112", "alice@hogwarts.edu", "Gryffindor House", 20000, "2000-09-20"));
+        addHandler(db, new Employee(20000, "Boby", "boby", "10213352",
+                "Bob", "(404)789-2313", "boby@hogwarts.edu", "Hufflepuff House", 50000, "2000-04-20"));
+        addHandler(db, new Employee(30000, "Ryan", "ryan", "32193525",
+                "Ryanny", "(210)096-3287", "ryan@hogwarts.edu", "Ravenclaw House", 90000, "2000-04-10"));
+        addHandler(db, new Employee(40000, "Samy", "samy", "32111111",
+                "Sam", "(450)218-8876", "samy@hogwarts.edu", "Slytherin", 40000, "2000-01-11"));
+        addHandler(db, new Employee(50000, "Ted", "ted", "24343244",
+                "Teddy", "(208)222-8712", "ted@hogwarts.edu", "Azkaban", 110000, "2000-11-3"));
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase db, int i, int i1)
-    {
-        db.execSQL("DROP TABLE IF EXISTS "+ TABLE_NAME);
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         onCreate(db);
     }
 
-    public Cursor loadHandler()
-    {
+    public Cursor loadHandler() {
         String query = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = null;
-        SQLiteDatabase db = this.getWritableDatabase();
-        if (db != null)
-        {
-            cursor = db.rawQuery(query,null);
-            db.close();
+        SQLiteDatabase db = this.getReadableDatabase();
+        if (db != null) {
+            cursor = db.rawQuery(query, null);
+//            db.close();
         }
 
         return cursor;
     }
 
-    public void addHandler(SQLiteDatabase db, Employee employee)
-    {
+    public void addHandler(SQLiteDatabase db, Employee employee) {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         ContentValues values = new ContentValues();
-        if (db!=null)
-        {
+        if (db != null) {
             values.put("ID", employee.getId());
             values.put("NAME", employee.getName());
             values.put("PASSWORD", employee.getPassword());
@@ -89,13 +83,12 @@ public class DBHandler extends SQLiteOpenHelper {
         }
     }
 
-    public Employee findHandler(String username, String password)
-    {
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE NAME='" + username + "' AND PASSWORD='" + password+"'";
-        SQLiteDatabase db = this.getWritableDatabase();
-        Employee employee= null;
-        Cursor cursor = db.rawQuery(query,null);
-        if (cursor!=null && cursor.getCount()>0 && cursor.moveToFirst()) {
+    public Employee findHandler(String username, String password) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE NAME='" + username + "' AND PASSWORD='" + password + "'";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Employee employee = null;
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
             employee = new Employee(Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1),
                     cursor.getString(2),
@@ -106,16 +99,16 @@ public class DBHandler extends SQLiteOpenHelper {
                     cursor.getString(7),
                     Integer.parseInt(cursor.getString(8)),
                     cursor.getString(9)
-                    );
+            );
             cursor.close();
         }
         db.close();
         return employee;
     }
 
-    public boolean updateHandler(Employee employee)
-    {
-        String UPDATE_SQL_COMMAND = String.format("UPDATE %s SET NICKNAME=%s, EMAIL=%s, ADDRESS=%s, PASSWORD=%s, PHONE=%s WHERE ID=%s RETURNING *",
+    public void partialUpdateHandler(Employee employee) {
+        // invoked by user, update some optional fields
+        String UPDATE_SQL_COMMAND = String.format("UPDATE %s SET NICKNAME='%s', EMAIL='%s', ADDRESS='%s', PASSWORD='%s', PHONE='%s' WHERE ID=%s",
                 TABLE_NAME,
                 employee.getNickname(),
                 employee.getEmail(),
@@ -124,9 +117,25 @@ public class DBHandler extends SQLiteOpenHelper {
                 employee.getPhone(),
                 employee.getId());
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(UPDATE_SQL_COMMAND,null);
-        cursor.close();
-        return cursor.getCount()==1;
+        db.execSQL(UPDATE_SQL_COMMAND);
+    }
+
+    public boolean fullUpdateHandler(Employee employee)
+    {
+//        invoked by admin, update all fields except ID
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("NAME", employee.getName());
+        values.put("PASSWORD", employee.getPassword());
+        values.put("SSN", employee.getSsn());
+        values.put("NICKNAME", employee.getNickname());
+        values.put("PHONE", employee.getPhone());
+        values.put("SALARY", employee.getSalary());
+        values.put("ADDRESS", employee.getAddress());
+        values.put("EMAIL", employee.getEmail());
+        values.put("BIRTHDAY", dateFormat.format(employee.getBirthday()));
+        return -1!=db.update(TABLE_NAME,values,"ID=?", new String[]{String.valueOf(employee.getId())});
     }
 
 }

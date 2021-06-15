@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SQLinjectdemo">
-        <activity android:name=".Result"></activity>
+        <activity android:name=".AllEmployee"></activity>
+        <activity android:name=".DataViewer" />
+        <activity android:name=".Result" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

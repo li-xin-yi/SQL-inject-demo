@@ -1,11 +1,12 @@
 package com.example.sql_inject_demo;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class Employee {
+public class Employee implements Serializable {
     private String name, password, ssn, nickname, phone, email, address;
     private int salary,id;
     private Date birthday;

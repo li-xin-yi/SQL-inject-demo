@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".DataViewer">
+
+    <LinearLayout
+        android:id="@+id/mainLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="12dp"
+        android:shadowColor="#CC000000"
+        android:shadowDy="40"
+        android:shadowRadius="100"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="4dp"
+            android:padding="5dp">
+
+
+            <TextView
+                android:id="@+id/nameViewer"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="0dp"
+                android:alpha="1"
+                android:gravity="center"
+                android:text="Name"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/idViewer"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="0dp"
+                android:layout_marginTop="120dp"
+                android:alpha="1"
+                android:gravity="center"
+                android:text="ID"
+                android:textColor="@color/purple_500"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ssnViewer"
+                android:layout_width="140dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="0dp"
+                android:gravity="center_vertical"
+                android:text="SSN"
+                android:textColor="@color/purple_200" />
+
+            <TextView
+                android:id="@+id/salaryViewer"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="260dp"
+                android:layout_marginTop="0dp"
+                android:alpha="0.8"
+                android:gravity="center_vertical"
+                android:text="Salary"
+                android:textColor="@color/purple_200"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/nicknameViewer"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="30dp"
+                android:alpha="0.8"
+                android:gravity="center_vertical"
+                android:text="Nickname"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/birthdayViewer"
+                android:layout_width="120dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="220dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center_vertical"
+                android:text="Birthday"
+                android:textColor="@color/purple_700" />
+
+            <TextView
+                android:id="@+id/phoneViewer"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="60dp"
+                android:gravity="center_vertical"
+                android:text="Phone" />
+
+            <TextView
+                android:id="@+id/emailViewer"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="90dp"
+                android:gravity="center_vertical"
+                android:text="Email" />
+
+            <TextView
+                android:id="@+id/addressViewer"
+                android:layout_width="200dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="120dp"
+                android:layout_marginTop="120dp"
+                android:gravity="center_vertical"
+                android:text="Address" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
