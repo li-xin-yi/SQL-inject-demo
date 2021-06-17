@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void resetOnClick(View v)
     {
-        this.deleteDatabase(dbhandler.getDatabaseName());
+        deleteDatabase(dbhandler.getDatabaseName());
         usernameInput.setText("");
         passwordInput.setText("");
     }

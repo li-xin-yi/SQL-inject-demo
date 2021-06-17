@@ -31,9 +31,9 @@ public class DBHandler extends SQLiteOpenHelper {
                 + "EMAIL TEXT,"
                 + "ADDRESS TEXT,"
                 + "SALARY INTEGER,"
-                + "BIRTHDAY DATE)";
+                + "BIRTHDAY DATE, PRIMARY KEY(ID, NAME))";
         db.execSQL(SQL_CREATE_TABLE);
-        addHandler(db, new Employee(99999, "Admin", "admin", "43254314",
+        addHandler(db,new Employee(99999, "Admin", "admin", "43254314",
                 "Ad", "(403)220-1191", "admin@hogwarts.edu", "Gryffindor House", 400000, "1990-03-05"));
         addHandler(db, new Employee(10000, "Alice", "alice", "10211002",
                 "Ali", "(400)210-2112", "alice@hogwarts.edu", "Gryffindor House", 20000, "2000-09-20"));
@@ -59,7 +59,6 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         if (db != null) {
             cursor = db.rawQuery(query, null);
-//            db.close();
         }
 
         return cursor;
@@ -81,6 +80,12 @@ public class DBHandler extends SQLiteOpenHelper {
             values.put("BIRTHDAY", dateFormat.format(employee.getBirthday()));
             db.insert(TABLE_NAME, null, values);
         }
+    }
+
+    public void addInterface(Employee employee)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        addHandler(db,employee);
     }
 
     public Employee findHandler(String username, String password) {
@@ -136,6 +141,12 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put("EMAIL", employee.getEmail());
         values.put("BIRTHDAY", dateFormat.format(employee.getBirthday()));
         return -1!=db.update(TABLE_NAME,values,"ID=?", new String[]{String.valueOf(employee.getId())});
+    }
+
+    public boolean deleteHandler(Employee employee)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME,"ID=?", new String[]{String.valueOf(employee.getId())}) > 0;
     }
 
 }

@@ -22,14 +22,16 @@
             <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:stretchColumns="1">
+                android:stretchColumns="0,1"
+                android:weightSum="2">
 
                 <TableRow>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="65dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
                         android:layout_marginTop="20dp"
                         android:hint="Name"
                         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +53,9 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="ID"
                     app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +76,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="65dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
                         android:layout_marginTop="20dp"
                         android:hint="Password"
                         app:passwordToggleEnabled="true"
@@ -94,7 +99,8 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="65dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
                         android:layout_marginTop="20dp"
                         android:hint="SSN"
                         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +111,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:ems="15"
-                            android:inputType="text" />
+                            android:inputType="number" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </TableRow>
 
@@ -121,7 +127,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="Salary"
                     app:layout_constraintStart_toStartOf="parent"
@@ -141,7 +148,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="Address"
                     app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +170,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="Email"
                     app:layout_constraintStart_toStartOf="parent"
@@ -173,7 +182,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:inputType="text" />
+                        android:inputType="textEmailAddress" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 </TableRow>
@@ -183,7 +192,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="Nickname"
                     app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +214,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="Phone"
                     app:layout_constraintStart_toStartOf="parent"
@@ -215,7 +226,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:ems="15"
-                        android:inputType="text" />
+                        android:inputType="phone" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 </TableRow>
@@ -224,7 +235,8 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="65dp"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginEnd="50dp"
                     android:layout_marginTop="20dp"
                     android:hint="Birthday"
                     app:layout_constraintStart_toStartOf="parent"
@@ -245,32 +257,46 @@
 
                 <TableRow>
 
-                    <LinearLayout
-                        android:id="@+id/layout1"
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:layout_marginTop="65dp"
-                        android:layout_marginStart="30dp"
-                        android:orientation="horizontal">
 
                         <Button
-                            android:id="@+id/updateButton"
+                            android:id="@+id/addButton"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginEnd="50dp"
+                            android:layout_marginTop="0dp"
                             android:onClick="partialUpdateProfile"
                             android:text="Update" />
+                </TableRow>
+
+                <TableRow android:visibility="gone"
+                    android:id="@+id/deleteRow">
+
+                    <Button
+                        android:id="@+id/deleteButton"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_height="wrap_content"
+
+                        android:text="Delete"/>
+                </TableRow>
+
+                <TableRow>
 
                         <Button
                             android:id="@+id/signoffButton"
                             android:layout_width="wrap_content"
+                            android:layout_marginStart="50dp"
+                            android:layout_marginEnd="50dp"
+                            android:layout_marginTop="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="20dp"
-                            android:text="Sign off" />
 
-                    </LinearLayout>
+                            android:text="Sign off"/>
                 </TableRow>
+
+
 
 
             </TableLayout>

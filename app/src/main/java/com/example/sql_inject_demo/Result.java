@@ -5,13 +5,12 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TableRow;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -26,7 +25,8 @@ public class Result extends AppCompatActivity {
     DBHandler dbHandler;
     final Calendar myCalendar = Calendar.getInstance();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    Button updateBotton, signoffBotton;
+    Button updateBotton, signoffBotton, deleteBotton;
+    TableRow deleteRow;
     boolean admin;
 
 
@@ -52,8 +52,11 @@ public class Result extends AppCompatActivity {
         phoneInput = findViewById(R.id.phoneInput);
         birthdayInput = findViewById(R.id.birthdayInput);
 
-        updateBotton = findViewById(R.id.updateButton);
+        updateBotton = findViewById(R.id.addButton);
         signoffBotton = findViewById(R.id.signoffButton);
+        deleteBotton = findViewById(R.id.deleteButton);
+
+        deleteRow = findViewById(R.id.deleteRow);
 
         dbHandler = new DBHandler(this,null,null,1);
 
@@ -95,6 +98,8 @@ public class Result extends AppCompatActivity {
 
         if(admin)
         {
+            deleteRow.setVisibility(View.VISIBLE);
+            deleteBotton.setOnClickListener(this::deleteOnClick);
             signoffBotton.setText("RETURN");
             signoffBotton.setOnClickListener(v -> {
                 Intent intent = new Intent(this,AllEmployee.class);
@@ -103,6 +108,7 @@ public class Result extends AppCompatActivity {
         }
         else
         {
+            deleteRow.setVisibility(View.GONE);
             salaryInput.setEnabled(false);
             ssnInput.setEnabled(false);
             nameInput.setEnabled(false);
@@ -153,6 +159,21 @@ public class Result extends AppCompatActivity {
 
     }
 
+    public void deleteOnClick(View v)
+    {
+        if(dbHandler.deleteHandler(employee))
+        {
+            messageBox("Delete Successfully!");
+            Intent intent = new Intent(this,AllEmployee.class);
+            startActivity(intent);
+
+        }
+        else
+        {
+            messageBox("Delete Fail!");
+        }
+    }
+
     public void messageBox(String title)
     {
         AlertDialog.Builder dialog = new AlertDialog.Builder(this);
@@ -160,5 +181,6 @@ public class Result extends AppCompatActivity {
         dialog.setPositiveButton("OK", (dialogInterface, i) -> {});
         dialog.show();
     }
+
 
 }
