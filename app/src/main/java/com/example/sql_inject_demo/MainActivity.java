@@ -68,7 +68,19 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
 
+    public void exitOnClick(View v)
+    {
+        finish();
+        System.exit(0);
+    }
+
+    public void resetOnClick(View v)
+    {
+        this.deleteDatabase(dbhandler.getDatabaseName());
+        usernameInput.setText("");
+        passwordInput.setText("");
     }
 
 

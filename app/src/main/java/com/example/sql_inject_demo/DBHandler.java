@@ -11,9 +11,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class DBHandler extends SQLiteOpenHelper {
-    private static final int DB_VERSION = 1;
-    private static final String DB_NAME = "employeeDB.db";
-    private static final String TABLE_NAME = "employee";
+    static final int DB_VERSION = 1;
+    static final String DB_NAME = "employeeDB.db";
+    static final String TABLE_NAME = "employee";
 
 
     public DBHandler(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
