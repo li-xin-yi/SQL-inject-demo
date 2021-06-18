@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TableRow;
 
 import java.text.DateFormat;
@@ -27,7 +28,7 @@ public class Result extends AppCompatActivity {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Button updateBotton, signoffBotton, deleteBotton;
     TableRow deleteRow;
-    boolean admin;
+    boolean admin,safe;
 
 
     @Override
@@ -80,6 +81,7 @@ public class Result extends AppCompatActivity {
 
         employee = (Employee) getIntent().getSerializableExtra("employee");
         admin = getIntent().getBooleanExtra("admin",false);
+        safe = getIntent().getBooleanExtra("safe",false);
 
 
 
@@ -116,6 +118,7 @@ public class Result extends AppCompatActivity {
             signoffBotton.setOnClickListener(v -> finish());
             updateBotton.setOnClickListener(this::partialUpdateProfile);
         }
+
     }
 
     public void partialUpdateProfile(View v)
@@ -127,7 +130,13 @@ public class Result extends AppCompatActivity {
         employee.setEmail(emailInput.getText().toString());
 
         try {
-            dbHandler.partialUpdateHandler(employee);
+            if(safe)
+            {
+                dbHandler.safePartialUpdateHandler(employee);
+            }
+            else {
+                dbHandler.partialUpdateHandler(employee);
+            }
             messageBox("Update Successfully!");
         } catch (Exception e) {
             messageBox(e.getMessage());

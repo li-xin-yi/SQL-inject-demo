@@ -10,14 +10,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 public class MainActivity extends AppCompatActivity {
     DBHandler dbhandler;
-    EditText usernameInput;
-    EditText passwordInput;
+    EditText usernameInput,passwordInput;
+    Switch safeSwitch;
 
 
     @Override
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         dbhandler = new DBHandler(this, null, null, 1);
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
-
+        safeSwitch = findViewById(R.id.safeSwitch);
     }
 
     ;
@@ -41,25 +42,28 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString();
 
         if (username.equals("") || password.equals("")) {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setMessage("Please fill in username and password!");
-            dialog.setPositiveButton("OK", (dialogInterface, i) -> {
-            });
-            dialog.show();
+            messageBox("Please fill in username and password!");
         } else {
-            Employee employee = dbhandler.findHandler(username, password);
+            boolean safe = safeSwitch.isChecked();
+            Employee employee = null ;
+            try
+            {
+                employee = dbhandler.findHandler(username, password,safe);
+            }
+            catch (Exception e)
+            {
+                messageBox(e.getMessage());
+                return;
+            }
             if (employee == null) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-                dialog.setMessage("Incorrect username or password!");
-                dialog.setPositiveButton("OK", (dialogInterface, i) -> {
-                });
-                dialog.show();
+                messageBox("Incorrect username or password!");
             } else {
                 Intent intent;
                 if (employee.getId()==99999) {
                     intent = new Intent(MainActivity.this, AllEmployee.class);
                 } else {
                     intent = new Intent(MainActivity.this, Result.class);
+                    intent.putExtra("safe",safe);
                     intent.putExtra("admin",false);
                     intent.putExtra("employee", employee);
                 }
@@ -81,6 +85,14 @@ public class MainActivity extends AppCompatActivity {
         deleteDatabase(dbhandler.getDatabaseName());
         usernameInput.setText("");
         passwordInput.setText("");
+    }
+
+    public void messageBox(String title)
+    {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setMessage(title);
+        dialog.setPositiveButton("OK", (dialogInterface, i) -> {});
+        dialog.show();
     }
 
 

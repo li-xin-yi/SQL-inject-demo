@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import androidx.appcompat.app.AlertDialog;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
@@ -88,11 +90,20 @@ public class DBHandler extends SQLiteOpenHelper {
         addHandler(db,employee);
     }
 
-    public Employee findHandler(String username, String password) {
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE NAME='" + username + "' AND PASSWORD='" + password + "'";
+    public Employee findHandler(String username, String password, Boolean safe) {
+        String query;
+        Cursor cursor;
         SQLiteDatabase db = this.getReadableDatabase();
+        if(!safe) {
+            query = "SELECT * FROM " + TABLE_NAME + " WHERE NAME='" + username + "' AND PASSWORD='" + password + "'";
+            cursor = db.rawQuery(query, null);
+        }
+        else
+        {
+            query = "SELECT * FROM "+ TABLE_NAME + " WHERE NAME=? AND PASSWORD=?";
+            cursor = db.rawQuery(query, new String[]{username,password});
+        }
         Employee employee = null;
-        Cursor cursor = db.rawQuery(query, null);
         if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
             employee = new Employee(Integer.parseInt(cursor.getString(0)),
                     cursor.getString(1),
@@ -112,7 +123,6 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     public void partialUpdateHandler(Employee employee) {
-        // invoked by user, update some optional fields
         String UPDATE_SQL_COMMAND = String.format("UPDATE %s SET NICKNAME='%s', EMAIL='%s', ADDRESS='%s', PASSWORD='%s', PHONE='%s' WHERE ID=%s",
                 TABLE_NAME,
                 employee.getNickname(),
@@ -147,6 +157,18 @@ public class DBHandler extends SQLiteOpenHelper {
     {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME,"ID=?", new String[]{String.valueOf(employee.getId())}) > 0;
+    }
+
+    public boolean safePartialUpdateHandler(Employee employee)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("PASSWORD", employee.getPassword());
+        values.put("NICKNAME", employee.getNickname());
+        values.put("PHONE", employee.getPhone());
+        values.put("ADDRESS", employee.getAddress());
+        values.put("EMAIL", employee.getEmail());
+        return -1!=db.update(TABLE_NAME,values,"ID=?", new String[]{String.valueOf(employee.getId())});
     }
 
 }
