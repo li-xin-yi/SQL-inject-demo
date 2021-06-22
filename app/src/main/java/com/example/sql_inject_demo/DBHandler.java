@@ -36,17 +36,17 @@ public class DBHandler extends SQLiteOpenHelper {
                 + "BIRTHDAY DATE, PRIMARY KEY(ID, NAME))";
         db.execSQL(SQL_CREATE_TABLE);
         addHandler(db,new Employee(99999, "Admin", "admin", "43254314",
-                "Ad", "(403)220-1191", "admin@hogwarts.edu", "Gryffindor House", 400000, "1990-03-05"));
+                "Admin", "(403) 220-1191", "admin@hogwarts.edu", "Gryffindor House", 400000, "1990-03-05"));
         addHandler(db, new Employee(10000, "Alice", "alice", "10211002",
-                "Ali", "(400)210-2112", "alice@hogwarts.edu", "Gryffindor House", 20000, "2000-09-20"));
-        addHandler(db, new Employee(20000, "Boby", "boby", "10213352",
-                "Bob", "(404)789-2313", "boby@hogwarts.edu", "Hufflepuff House", 50000, "2000-04-20"));
+                "Alice", "(400) 210-2112", "alice@hogwarts.edu", "Gryffindor House", 20000, "2000-09-20"));
+        addHandler(db, new Employee(20000, "Bobby", "bobby", "10213352",
+                "Bob", "(404) 789-2313", "boby@hogwarts.edu", "Hufflepuff House", 50000, "2000-04-20"));
         addHandler(db, new Employee(30000, "Ryan", "ryan", "32193525",
-                "Ryanny", "(210)096-3287", "ryan@hogwarts.edu", "Ravenclaw House", 90000, "2000-04-10"));
-        addHandler(db, new Employee(40000, "Samy", "samy", "32111111",
-                "Sam", "(450)218-8876", "samy@hogwarts.edu", "Slytherin House", 40000, "2000-01-11"));
+                "Ryanny", "(210) 096-3287", "ryan@hogwarts.edu", "Ravenclaw House", 90000, "2000-04-10"));
+        addHandler(db, new Employee(40000, "Sammy", "sammy", "32111111",
+                "Sam", "(450) 218-8876", "samy@hogwarts.edu", "Slytherin House", 40000, "2000-01-11"));
         addHandler(db, new Employee(50000, "Ted", "ted", "24343244",
-                "Teddy", "(208)222-8712", "ted@hogwarts.edu", "Azkaban", 110000, "2000-11-3"));
+                "Teddy", "(208) 222-8712", "ted@hogwarts.edu", "Azkaban", 110000, "2000-11-03"));
     }
 
     @Override
