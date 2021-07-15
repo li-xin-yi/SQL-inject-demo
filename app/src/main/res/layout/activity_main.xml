@@ -6,111 +6,119 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="120dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            android:stretchColumns="0">
 
 
-        <TableRow>
+            <TableRow>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="65dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="65dp"
 
-                android:hint="Username">
+                    android:hint="Username">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/usernameInput"
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/usernameInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:ems="15"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </TableRow>
+
+            <TableRow>
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:inputType="text" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </TableRow>
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="65dp"
+                    android:hint="Password"
+                    app:passwordToggleEnabled="true">
 
-        <TableRow>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/passwordInput"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="15"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </TableRow>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="65dp"
-                android:hint="Password"
-                app:passwordToggleEnabled="true">
+            <TableRow>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/passwordInput"
+                <Switch
+                    android:id="@+id/safeSwitch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ems="15"
-                    android:inputType="textPassword" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </TableRow>
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="65dp"
+                    android:clickable="true"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Safe Mode"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    android:textStyle="italic"
+                    tools:ignore="UseSwitchCompatOrMaterialXml"
+                    android:focusable="true" />
+            </TableRow>
 
-        <TableRow>
+            <TableRow>
 
-            <Switch
-                android:id="@+id/safeSwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="65dp"
-                android:clickable="true"
-                android:fontFamily="sans-serif-medium"
-                android:text="Safe Mode"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:textStyle="italic" />
-        </TableRow>
+                <Button
+                    android:id="@+id/signinButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="65dp"
+                    android:onClick="signOnClick"
 
-        <TableRow>
+                    android:text="Sign in" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/signinButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="65dp"
-                android:onClick="signOnClick"
-                android:text="Sign in" />
-        </TableRow>
+            <TableRow>
 
-        <TableRow>
+                <Button
+                    android:id="@+id/resetButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="65dp"
+                    android:onClick="resetOnClick"
+                    android:text="Reset" />
+            </TableRow>
 
-            <Button
-                android:id="@+id/resetButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="65dp"
-                android:onClick="resetOnClick"
-                android:text="Reset" />
-        </TableRow>
+            <TableRow>
 
-        <TableRow>
-
-            <Button
-                android:id="@+id/exitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="65dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="65dp"
-                android:onClick="exitOnClick"
-                android:text="Exit" />
-        </TableRow>
+                <Button
+                    android:id="@+id/exitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="65dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginEnd="65dp"
+                    android:onClick="exitOnClick"
+                    android:text="Exit" />
+            </TableRow>
 
 
-    </TableLayout>
+        </TableLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
